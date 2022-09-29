@@ -3,7 +3,7 @@
 #include "../hpp/structures.h"
 
 
-int main(int argc, char** argv) {
+void quotes(int argc, char** argv) {
 
 	// Initialize the Ticker object:
 	yfinance::Symbol* tk;
