@@ -1,25 +1,38 @@
+#pragma once
+#include <boost/algorithm/string.hpp>
 #include "boost/lexical_cast.hpp"
 #include <nlohmann/json.hpp>
-#include "../hpp/utils.h"
-#include <cpr/cpr.h>
 #include <algorithm>
+#include <string>
+#include <cpr/cpr.h>
+#include "../hpp/structures.h"
+#include "../hpp/utils.h"
+using json = nlohmann::json;
 
 namespace yfinance {
 
-	namespace base {
+    class Symbol {
 
-		namespace quotes {
+    private:
 
-			yfinance::utils::constants::general::response get_quotes(
-				const std::string&& symbol,
-				const std::string&& interval,
-				time_t&& start = -1,
-				time_t&& end = -1
-			);
+        // Member values:
+        std::string m_symbol;
 
-			yfinance::utils::constants::quotes::qmap to_umap(
-				const yfinance::utils::constants::general::response& response
-			);
-		}
-	}
+    public:
+
+        // Constructors:
+        Symbol(std::string symbol)
+            : m_symbol(symbol) {}
+
+        // Member functions:
+        Structures::Quotes get_quotes(
+            const std::string&& interval,
+            time_t&& start = -1,
+            time_t&& end = -1,
+            const std::string sep = ","
+        );
+
+        Utils::Types::Options get_options();
+
+    };
 }

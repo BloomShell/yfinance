@@ -2,42 +2,28 @@
 #include "../hpp/base.h"
 #include "../hpp/structures.h"
 
-/*
-	Testing the queries of Quotes for different
-	time intervals.
-	--------------------------------------------------------
-*/
 
+int main(int argc, char** argv) {
 
-void quotes() {
-	
-	std::string symbol = "AAPL";
-	std::string interval = "1h";
+	// Initialize the Ticker object:
+	yfinance::Symbol* tk;
+	tk = new yfinance::Symbol("AAPL");
 
-	std::cout << "Quering, Symbol: " << symbol << ", Interval: " << interval;
-	std::cout << "\n---------------------------------------\n\n\n";
+	// Loading quotes into struct:
+	auto quotes = tk->get_quotes("5m");
 
-	// Initializing an empty Quote object.
-	yfinance::structures::quotes::Quote quote(symbol);
+	// Print Quotes content:
+	std::cout << quotes;
 
-	// Quering the response from yfinance 
-	// and parsing as Json.
-	auto response = yfinance::base::quotes::get_quotes(
-		std::move(symbol), std::move(interval));
-	
-	// Loading the queried string within the Json
-	// into the Quote struct.
-	quote.load(response, ",");
-
-	// Printing the summary.
-	quote.summary();
-
-	// Benchmarking.
+	// Benchmarking:
 	auto f = std::bind(
-		&yfinance::structures::quotes::Quote::load, quote,
-		std::placeholders::_1, std::placeholders::_2);
+		&yfinance::Symbol::get_quotes, tk,
+		std::placeholders::_1, std::placeholders::_2,
+		std::placeholders::_3, std::placeholders::_4);
+
+	auto timeit = Utils::Benchmarking::Timeit(
+		100, f, "1h", -1, -1, ",");
 	
-	yfinance::utils::benchmarking::timeit::Timeit(
-		100, true, f, response, ",");
-	
+	// Printing benchmark results:
+	std::cout << timeit;
 }
