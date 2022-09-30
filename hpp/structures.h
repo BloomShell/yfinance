@@ -25,8 +25,8 @@ namespace Structures {
 
         friend std::ostream& operator<<(
             std::ostream& stream,
-            const Structures::Quotes& q
-            ) {
+            const Structures::Quotes& q) 
+        {
             const unsigned int size = q.m_close.size();
             stream << "=======================================================================\n";
             std::cout << "============================== QUOTE CONTENT ==========================\n";
@@ -43,30 +43,32 @@ namespace Structures {
 
     struct Option {
 
-        bool m_in_the_money;
-        std::string m_contract_symbol, m_currency,
-            m_contract_size;
-        float m_strike, m_last_price, m_change,
-            m_percent_change, m_open_interest,
-            m_bid, m_ask, m_implied_volatility,
-            m_volume;
-        time_t m_expiration, m_last_trade_date;
+        std::optional<bool> m_inTheMoney;
+        std::optional<std::string> m_contractSymbol,
+            m_currency, m_contractSize;
+        std::optional<float> m_strike, 
+            m_lastPrice, m_change, m_volume, 
+            m_bid, m_ask, m_percentChange, 
+            m_openInterest, m_impliedVolatility;
+        std::optional<time_t> m_expiration, 
+            m_lastTradeDate;
 
         Option() = default;
 
         Option(
-            bool in_the_money, std::string constract_symbol,
-            std::string currency, std::string contract_size,
-            float strike, float last_price, float change,
-            float percentage_change, float open_interest,
-            float bid, float ask, float implied_volatility,
-            float volume, time_t expiration, time_t last_trade_date)
-            : m_in_the_money(in_the_money), m_contract_symbol(constract_symbol),
-            m_currency(currency), m_contract_size(contract_size), m_strike(strike),
-            m_last_price(last_price), m_change(change), m_bid(bid), m_ask(ask),
-            m_percent_change(percentage_change), m_open_interest(open_interest),
-            m_implied_volatility(implied_volatility), m_volume(volume),
-            m_expiration(expiration), m_last_trade_date(last_trade_date) {}
+            bool inTheMoney, std::string contractSymbol,
+            std::string currency, std::string contractSize,
+            float strike, float lastPrice, float change,
+            float percentChange, float openInterest, float bid,
+            float ask, float impliedVolatility, float volume,
+            time_t expiration, time_t lastTradeDate)
+            : m_inTheMoney(inTheMoney), m_contractSymbol(contractSymbol),
+            m_currency(currency), m_contractSize(contractSize),
+            m_strike(strike), m_lastPrice(lastPrice), m_change(change),
+            m_bid(bid), m_ask(ask), m_percentChange(percentChange),
+            m_openInterest(openInterest), m_impliedVolatility(impliedVolatility),
+            m_volume(volume), m_expiration(expiration),
+            m_lastTradeDate(lastTradeDate) {};
     };
 
     struct TimeitResult {
@@ -86,8 +88,8 @@ namespace Structures {
 
         friend std::ostream& operator<<(
             std::ostream& stream,
-            const Structures::TimeitResult& t
-            ) {
+            const Structures::TimeitResult& t) 
+        {
             stream << "=======================================================================\n";
             stream << "=========================== SHOW TIMEIT RESULTS =======================\n";
             stream << "=======================================================================\n\n";
@@ -100,4 +102,5 @@ namespace Structures {
             return stream;
         }
     };
+
 }

@@ -91,10 +91,76 @@ namespace yfinance {
 	Utils::Types::Options Symbol::get_options(
 
 	) {
-		Utils::Types::Options options;
-		std::vector<Structures::Option> calls, puts;
-		options["CALL"] = calls;
-		options["PUT"] = puts;
-		return options;
+		cpr::Response r = cpr::Get(cpr::Url{
+			Utils::Statics::Options::v7 + m_symbol });
+
+		if ((r.status_code == 200) && (!r.text.empty())) {
+			
+			nlohmann::json j = nlohmann::json::parse(r.text);
+			Utils::Types::Options options;
+			std::vector<Structures::Option> calls, puts;
+			options["calls"] = calls;
+			options["puts"] = puts;
+
+			// Emplacing raw response inside struct
+			// applying casting:
+			for (auto& type : { "calls", "puts" }) {
+
+				auto& raw = j["optionChain"]["result"][0]
+					["options"][0][type];
+
+				unsigned int size = raw.size();
+				for (int i = 0; i < size; i++) {
+					
+					Structures::Option option;
+					
+					// Booleans:
+					if (raw[i].contains("inTheMoney")) option.m_inTheMoney =
+						std::move((bool)raw[i]["inTheMoney"]);
+					
+					// Strings:
+					if (raw[i].contains("contractSymbol")) option.m_contractSymbol =
+						std::move(raw[i]["contractSymbol"]);
+					if (raw[i].contains("currency")) option.m_currency =
+						std::move(raw[i]["currency"]);
+					if (raw[i].contains("contractSize")) option.m_contractSize =
+						std::move(raw[i]["contractSize"]);
+
+					// Floats:
+					if (raw[i].contains("strike")) option.m_strike =
+						std::move(std::stof(raw[i]["strike"].dump()));
+					if (raw[i].contains("lastPrice")) option.m_lastPrice =
+						std::move(std::stof(raw[i]["lastPrice"].dump()));
+					if (raw[i].contains("change")) option.m_change =
+						std::move(std::stof(raw[i]["change"].dump()));
+					if (raw[i].contains("percentChange")) option.m_percentChange =
+						std::move(std::stof(raw[i]["percentChange"].dump()));
+					if (raw[i].contains("openInterest")) option.m_openInterest =
+						std::move(std::stof(raw[i]["openInterest"].dump()));
+					if (raw[i].contains("bid")) option.m_bid =
+						std::move(std::stof(raw[i]["bid"].dump()));
+					if (raw[i].contains("ask")) option.m_ask =
+						std::move(std::stof(raw[i]["ask"].dump()));
+					if (raw[i].contains("impliedVolatility")) option.m_impliedVolatility =
+						std::move(std::stof(raw[i]["impliedVolatility"].dump()));
+					if (raw[i].contains("volume")) option.m_volume =
+						std::move(std::stof(raw[i]["volume"].dump()));
+					if (raw[i].contains("expiration")) option.m_expiration =
+						std::move((time_t)std::stoll(raw[i]["expiration"].dump()));
+					if (raw[i].contains("lastTradeDate")) option.m_lastTradeDate =
+						std::move((time_t)std::stoll(raw[i]["lastTradeDate"].dump()));
+					
+					options[type].emplace_back(option);
+					
+				}
+			}
+
+			return options;
+		}
+		else {
+			std::string error_message =
+				"Request failed with status code: " + r.status_code;
+			throw std::runtime_error(error_message);
+		}
 	}
 }
