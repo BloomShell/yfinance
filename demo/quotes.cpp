@@ -9,7 +9,7 @@ void quotes(int argc, char** argv) {
 	tk = new yfinance::Symbol("AAPL");
 
 	// Loading quotes into struct:
-	auto quotes = tk->get_quotes("1d");
+	auto quotes = tk->get_quotes("1h");
 
 	// Print Quotes content:
 	std::cout << quotes;
