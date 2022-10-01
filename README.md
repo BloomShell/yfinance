@@ -4,7 +4,7 @@
 This is a quick and simple repository which is still in development. Its aim is to simplify the interaction between the **_Yahoo Finance_** API and **_C++_**. 
 
 ### Version Updates
-**_v.(09-30-2022)_**:
+**_v-0.1 (09-30-2022)_**:
 Added the `get_quotes` and `get_options` member functions for the `Symbol` class. 
 
 ### Approach
