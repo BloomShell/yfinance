@@ -14,7 +14,7 @@ namespace Requests {
 
 	Structures::Response Requests(
 		std::string&& url,
-		payload params
+		const payload& params
 	) {
 		CURL* curl = curl_easy_init();
 		std::string responseBuffer;

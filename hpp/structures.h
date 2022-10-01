@@ -8,6 +8,7 @@
 using milliseconds = std::chrono::milliseconds;
 
 
+
 namespace Structures {
 
     struct Quotes {

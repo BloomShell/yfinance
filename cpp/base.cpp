@@ -97,7 +97,7 @@ namespace yfinance {
 			Utils::Statics::Options::v7 + m_symbol });
 
 		if ((r.status_code == 200) && (!r.text.empty())) {
-			
+
 			json rjson = nlohmann::json::parse(r.text);
 			Utils::Types::Options options;
 			std::vector<Structures::Option> calls, puts;
@@ -106,10 +106,13 @@ namespace yfinance {
 
 			// Emplacing raw response inside struct
 			// applying casting:
-			for (auto& type : { "calls", "puts" }) {
+			for (auto& kind : { "calls", "puts" }) {
 
+				if (!rjson["optionChain"]["result"][0]
+					["options"][0].contains(kind)) continue;
+				
 				auto& raw = rjson["optionChain"]["result"][0]
-					["options"][0][type];
+					["options"][0][kind];
 
 				unsigned int size = raw.size();
 				for (int i = 0; i < size; i++) {
@@ -155,7 +158,7 @@ namespace yfinance {
 						if (key == "lastTradeDate") option.m_lastTradeDate =
 							std::move((time_t)std::stoll(val.dump()));
 					}
-					options[type].emplace_back(option);
+					options[kind].emplace_back(option);
 				}
 			}
 			return options;

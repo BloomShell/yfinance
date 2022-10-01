@@ -6,7 +6,7 @@
 namespace Benchmarking {
     template<typename Function, typename ... Args>
     Structures::TimeitResult Timeit(
-        std::size_t iters, Function& f, Args&& ... args
+        const std::size_t iters, const Function& f, Args&& ... args
     ) {
         if (iters < 1) throw std::runtime_error("Iters must be >= 1.");
         std::vector<std::chrono::milliseconds> durations;
