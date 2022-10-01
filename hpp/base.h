@@ -9,6 +9,7 @@
 #include "../hpp/utils.h"
 using json = nlohmann::json;
 
+
 namespace yfinance {
 
     class Symbol {

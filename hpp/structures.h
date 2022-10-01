@@ -7,6 +7,7 @@
 #include <iostream>
 using milliseconds = std::chrono::milliseconds;
 
+
 namespace Structures {
 
     struct Quotes {
@@ -103,4 +104,24 @@ namespace Structures {
         }
     };
 
+    struct Response {
+        std::string m_text;
+        long m_status_code;
+
+        Response(
+            std::string text, long status_code)
+            : m_text(text), m_status_code(status_code) {};
+
+        friend std::ostream& operator<<(
+            std::ostream& stream,
+            const Response& r)
+        {
+            stream << "=======================================================================\n";
+            stream << "========================== SHOW REQUESTS RESULTS ======================\n";
+            stream << "=======================================================================\n\n";
+
+            stream << "\tStatus Code       \t: " << r.m_status_code << "\n\n\n";
+            return stream;
+        }
+    };
 }

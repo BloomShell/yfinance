@@ -1,6 +1,5 @@
-#include "../hpp/utils.h"
 #include "../hpp/base.h"
-#include "../hpp/structures.h"
+#include "../hpp/benchmark.h"
 
 
 void options(int argc, char** argv) {
@@ -19,7 +18,7 @@ void options(int argc, char** argv) {
 	auto f = std::bind(
 		&yfinance::Symbol::get_options, tk);
 
-	auto timeit = Utils::Benchmarking::Timeit(
+	auto timeit = Benchmarking::Timeit(
 		10, f);
 
 	// Printing benchmark results:
