@@ -1,7 +1,7 @@
 ## YFINANCE (C++)
 
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Yahoo_Finance_Logo_2019.png" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Yahoo_Finance_Logo_2019.png" width=150 />
 </p>
 
 ### Quick Start
