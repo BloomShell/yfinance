@@ -1,6 +1,6 @@
 ## YFINANCE (C++)
 
-![](https://upload.wikimedia.org/wikipedia/commons/3/37/Yahoo_Finance_Logo_2019.png)
+<div style="text-align:center"><img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Yahoo_Finance_Logo_2019.png" /></div>
 
 ### Quick Start
 This is a quick and simple repository which is still in development. Its aim is to simplify the interaction between the **_Yahoo Finance_** API and **_C++_**. 
