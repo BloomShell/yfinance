@@ -16,7 +16,7 @@ namespace Requests {
 
 	Structures::Response Requests(
 		std::string&& url,
-		const payload& params = {}
+		const payload&& params = {}
 	);
 
 }

@@ -28,6 +28,10 @@ namespace Utils {
             extern const std::string v7;
         }
 
+        namespace Summary {
+            extern const std::string v11;
+        }
+
         namespace Overall {
             extern std::vector<std::string> nans;
         }

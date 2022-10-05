@@ -23,6 +23,11 @@ namespace Utils {
                 "https://query2.finance.yahoo.com/v7/finance/options/";
         }
 
+        namespace Summary {
+            const std::string v11 =
+                "https://query2.finance.yahoo.com/v11/finance/quoteSummary/";
+        }
+
         namespace Overall {
             std::vector<std::string> nans = {
                 "#N/A", "NaN", "nan", "<NA>", "N/A", "n/a",

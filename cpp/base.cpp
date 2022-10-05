@@ -91,7 +91,6 @@ namespace yfinance {
 	}
 
 	Utils::Types::Options Symbol::get_options(
-
 	) {
 		cpr::Response r = cpr::Get(cpr::Url{
 			Utils::Statics::Options::v7 + m_symbol });
@@ -169,4 +168,31 @@ namespace yfinance {
 			throw std::runtime_error(error_message);
 		}
 	}
+
+	Structures::Profile Symbol::get_profile(
+	) {
+		cpr::Response r = cpr::Get(cpr::Url{
+			Utils::Statics::Summary::v11 + "AAPL" },
+			cpr::Parameters{ {"modules", "assetProfile"} });
+
+		nlohmann::json quoteSummary = nlohmann::json::parse(r.text);
+		nlohmann::json& moduleSummary = quoteSummary["quoteSummary"]
+			["result"][0]["assetProfile"];
+
+		return Structures::Profile(
+			moduleSummary["address1"],
+			moduleSummary["city"],
+			moduleSummary["state"],
+			moduleSummary["zip"],
+			moduleSummary["country"],
+			moduleSummary["phone"],
+			moduleSummary["website"],
+			moduleSummary["industry"],
+			moduleSummary["sector"],
+			moduleSummary["longBusinessSummary"],
+			std::stoi(moduleSummary["fullTimeEmployees"].dump()),
+			std::stoi(moduleSummary["overallRisk"].dump()),
+			moduleSummary["companyOfficers"]
+		);
+	};
 }

@@ -24,7 +24,6 @@ namespace Benchmarking {
         milliseconds min = *std::min_element(durations.begin(), durations.end());
         milliseconds sum = std::accumulate(durations.begin(), durations.end(), milliseconds(0));
         milliseconds avg = sum / durations.size();
-
         return Structures::TimeitResult(iters, min, max, avg, sum);
     };
 }

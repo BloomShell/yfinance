@@ -22,8 +22,10 @@ namespace yfinance {
     public:
 
         // Constructors:
-        Symbol(std::string symbol)
-            : m_symbol(symbol) {}
+        Symbol(
+            std::string symbol
+        ):
+            m_symbol(symbol) {}
 
         // Member functions:
         Structures::Quotes get_quotes(
@@ -34,6 +36,8 @@ namespace yfinance {
         );
 
         Utils::Types::Options get_options();
+
+        Structures::Profile get_profile();
 
     };
 }
