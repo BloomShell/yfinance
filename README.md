@@ -10,6 +10,8 @@ This is a quick and simple repository which is still in development. Its aim is 
 ### Version Updates
 **_v-0.1 (09-30-2022)_**:
 Added the `get_quotes` and `get_options` member functions for the `Symbol` class. 
+**_v-0.1 (09-30-2022)_**:
+Added the `get_profile` member functions for the `Symbol` class. 
 
 ### Approach
 The core element of the **_"pseudo"_** library is the `Symbol` class which is initialized through the asset's symbol. An exemple with the keyword *new*, therefore a pointer to the `Symbol` class is initialized:
