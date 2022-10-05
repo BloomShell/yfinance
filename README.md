@@ -21,7 +21,7 @@ yfinance::Symbol* sym = new yfinance::Symbol("GS");
 ```
 In order to load **_quotes_** from the `Symbol` object you call the member function `get_quotes` with arguments ***interval***, ***start*** and ***end***. The ***interval*** argument is mandatory. If ***start*** or ***end*** are not specified the last available amount of data will be queried.
 ```c++ 
-auto Structures::Quotes = sym->get_quotes("5m");
+Structures::Quotes = sym->get_quotes("5m");
 ```
 In order to load **_options_** from the `Symbol` object you call the member function `get_options` wich does not take arguments:
 ```c++ 
