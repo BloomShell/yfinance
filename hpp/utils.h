@@ -37,24 +37,3 @@ namespace Utils {
         }
     }
 }
-
-
-inline std::ostream& operator<<(
-    std::ostream& stream,
-    const Utils::Types::Options& options)
-{
-
-    const unsigned int n_calls = options.at("calls").size();
-    const unsigned int n_puts = options.at("puts").size();
-
-    stream << "=======================================================================\n";
-    stream << "============================= OPTIONS CONTENT =========================\n";
-    stream << "=======================================================================\n\n";
-    stream << "\tQueried info:\n";
-    stream << "\t-----------------------------\n";
-    stream << "\tCalls      \t: " << n_calls << "\n";
-    stream << "\tPuts       \t: " << n_puts << "\n";
-    stream << "\tExpiration \t: " << options.at("calls")[0].m_expiration.value() << "\n\n\n";
-    return stream;
-
-};
