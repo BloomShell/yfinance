@@ -45,13 +45,13 @@ namespace Structures {
         {
             const unsigned int size = q.m_close.size();
             stream << "=======================================================================\n";
-            std::cout << "============================== QUOTE CONTENT ==========================\n";
-            std::cout << "=======================================================================\n\n";
-            std::cout << "\tQueried info:\n";
-            std::cout << "\t----------------------------\n";
-            std::cout << "\tObservations   \t: " << size << "\n";
-            std::cout << "\tStarting (Unix)\t: " << q.m_unix[0] << "\n";
-            std::cout << "\tEnding (Unix)  \t: " << q.m_unix[size - 1] << "\n\n\n";
+            stream << "============================== QUOTE CONTENT ==========================\n";
+            stream << "=======================================================================\n\n";
+            stream << "\tQueried info:\n";
+            stream << "\t----------------------------\n";
+            stream << "\tObservations   \t: " << size << "\n";
+            stream << "\tStarting (Unix)\t: " << q.m_unix[0] << "\n";
+            stream << "\tEnding (Unix)  \t: " << q.m_unix[size - 1] << "\n\n\n";
             return stream;
         };
 
@@ -114,6 +114,24 @@ namespace Structures {
             m_expiration(expiration),
             m_lastTradeDate(lastTradeDate) 
         {};
+
+        friend std::ostream& operator<<(
+            std::ostream& stream,
+            const Structures::Option& opt)
+        {
+            stream <<    "=======================================================================\n";
+            stream << "============================== OPTION CONTENT =========================\n";
+            stream << "=======================================================================\n\n";
+            stream << "\tQueried info:\n";
+            stream << "\t----------------------------\n";
+            stream << "\tSymbol        \t: " << opt.m_contractSymbol.value() << "\n";
+            stream << "\tCurrency      \t: " << opt.m_currency.value() << "\n";
+            stream << "\tExpiration    \t: " << opt.m_expiration.value() << "\n";
+            stream << "\tI.V.          \t: " << opt.m_impliedVolatility.value() << "\n";
+            stream << "\tBid           \t: " << opt.m_bid.value() << "\n";
+            stream << "\tAsk           \t: " << opt.m_ask.value() << "\n\n\n";
+            return stream;
+        };
     };
 
     struct Profile {
@@ -164,6 +182,21 @@ namespace Structures {
             m_overallRisk(overallRisk),
             m_companyOfficers(companyOfficers)
         {};
+
+        friend std::ostream& operator<<(
+            std::ostream& stream,
+            const Structures::Profile& p) {
+            stream << "=======================================================================\n";
+            stream << "========================== SHOW PROFILE SUMMARY =======================\n";
+            stream << "=======================================================================\n\n";
+            stream << "\tCountry         \t: " << p.m_country.value() << "\n";
+            stream << "\tState           \t: " << p.m_state.value() << "\n";
+            stream << "\tCity            \t: " << p.m_city.value() << "\n";
+            stream << "\tAdress          \t: " << p.m_address.value() << "\n";
+            stream << "\tIndustry        \t: " << p.m_industry.value() << "\n";
+            stream << "\tSector          \t: " << p.m_sector.value() << "\n\n\n";
+            return stream;
+        }
 
     };
 

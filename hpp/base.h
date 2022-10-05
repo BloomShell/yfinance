@@ -35,9 +35,15 @@ namespace yfinance {
             const std::string sep = ","
         );
 
-        Utils::Types::Options get_options();
+        Utils::Types::Options get_options(
+        );
 
-        Structures::Profile get_profile();
+        Structures::Profile get_profile(
+        );
+
+        nlohmann::json get_summary(
+            const std::string&& module
+        );
 
     };
 }

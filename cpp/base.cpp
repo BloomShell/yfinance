@@ -172,27 +172,54 @@ namespace yfinance {
 	Structures::Profile Symbol::get_profile(
 	) {
 		cpr::Response r = cpr::Get(cpr::Url{
-			Utils::Statics::Summary::v11 + "AAPL" },
+			Utils::Statics::Summary::v11 + m_symbol },
 			cpr::Parameters{ {"modules", "assetProfile"} });
 
-		nlohmann::json quoteSummary = nlohmann::json::parse(r.text);
-		nlohmann::json& moduleSummary = quoteSummary["quoteSummary"]
-			["result"][0]["assetProfile"];
+		if ((r.status_code == 200) && (!r.text.empty())) {
+			nlohmann::json quoteSummary = nlohmann::json::parse(r.text);
+			nlohmann::json& moduleSummary = quoteSummary["quoteSummary"]
+				["result"][0]["assetProfile"];
 
-		return Structures::Profile(
-			moduleSummary["address1"],
-			moduleSummary["city"],
-			moduleSummary["state"],
-			moduleSummary["zip"],
-			moduleSummary["country"],
-			moduleSummary["phone"],
-			moduleSummary["website"],
-			moduleSummary["industry"],
-			moduleSummary["sector"],
-			moduleSummary["longBusinessSummary"],
-			std::stoi(moduleSummary["fullTimeEmployees"].dump()),
-			std::stoi(moduleSummary["overallRisk"].dump()),
-			moduleSummary["companyOfficers"]
-		);
+			return Structures::Profile(
+				moduleSummary["address1"],
+				moduleSummary["city"],
+				moduleSummary["state"],
+				moduleSummary["zip"],
+				moduleSummary["country"],
+				moduleSummary["phone"],
+				moduleSummary["website"],
+				moduleSummary["industry"],
+				moduleSummary["sector"],
+				moduleSummary["longBusinessSummary"],
+				std::stoi(moduleSummary["fullTimeEmployees"].dump()),
+				std::stoi(moduleSummary["overallRisk"].dump()),
+				moduleSummary["companyOfficers"]
+			);
+		}
+		else {
+			std::string error_message =
+				"Request failed with status code: " + r.status_code;
+			throw std::runtime_error(error_message);
+		}
+		
 	};
+
+	nlohmann::json Symbol::get_summary(
+		const std::string&& module
+	) {
+		cpr::Response r = cpr::Get(cpr::Url{
+			Utils::Statics::Summary::v11 + m_symbol },
+			cpr::Parameters{ {"modules", module} });
+		
+		if ((r.status_code == 200) && (!r.text.empty())) {
+			nlohmann::json quoteSummary = nlohmann::json::parse(r.text);
+			return quoteSummary["quoteSummary"]
+				["result"][0][module];
+		}
+		else {
+			std::string error_message =
+				"Request failed with status code: " + r.status_code;
+			throw std::runtime_error(error_message);
+		}
+	}
 }
