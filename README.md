@@ -14,6 +14,9 @@ Added the `get_quotes` and `get_options` member functions for the `Symbol` class
 **_v-0.2 (10-05-2022)_**:
 Added the `get_profile` and `get_summary` member functions for the `Symbol` class. 
 
+**_v-0.3 (10-05-2022)_**:
+Added the `get_news` member functions for the `Symbol` class. 
+
 ### Approach
 The core element of the **_"pseudo"_** library is the `Symbol` class which is initialized through the asset's symbol. An exemple with the keyword *new*, therefore a pointer to the `Symbol` class is initialized:
 ```c++ 
