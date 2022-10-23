@@ -6,6 +6,7 @@
 #include <ostream>
 #include <iostream>
 #include <nlohmann/json.hpp>
+#include <unordered_set>
 using milliseconds = std::chrono::milliseconds;
 
 
@@ -262,5 +263,43 @@ namespace Structures {
             stream << "\tStatus Code       \t: " << r.m_status_code << "\n\n\n";
             return stream;
         }
+    };
+
+    struct News {
+        std::optional<std::string> m_title, m_publisher, m_link;
+        std::optional<time_t> m_providerPublishTime;
+        std::optional<std::vector<std::string>> m_relatedTickers;
+
+        News(
+            std::optional<std::string> title,
+            std::optional<std::string> publisher,
+            std::optional<std::string> link,
+            std::optional<time_t> providerPublishTime,
+            std::optional<std::vector<std::string>> relatedTickers
+        ) :
+            m_title(title),
+            m_publisher(publisher),
+            m_link(link),
+            m_providerPublishTime(providerPublishTime),
+            m_relatedTickers(relatedTickers) {};
+
+        friend std::ostream& operator<<(
+            std::ostream& stream,
+            const News& n) {
+            
+            stream << "=============================================================================================\n";
+            stream << "======================================= SHOW NEWS RESULTS ===================================\n";
+            stream << "=============================================================================================\n\n";
+
+            stream << "\tTitle           \t: " << n.m_title.value() << "\n";
+            stream << "\tPublisher       \t: " << n.m_publisher.value() << "\n";
+            stream << "\tLink            \t: " << n.m_link.value() << "\n";
+            stream << "\tPublish Time    \t: " << n.m_providerPublishTime.value() << "\n";
+            stream << "\tRelated Tickers \t: {";
+            for (auto& relatedTicker : n.m_relatedTickers.value()) stream << relatedTicker << ',';
+            stream << "}\n\n\n";
+            return stream;
+
+        };
     };
 }

@@ -4,6 +4,7 @@
 #include <nlohmann/json.hpp>
 #include <algorithm>
 #include <string>
+#include <regex>
 #include <cpr/cpr.h>
 #include "../hpp/structures.h"
 #include "../hpp/utils.h"
@@ -43,6 +44,9 @@ namespace yfinance {
 
         nlohmann::json get_summary(
             const std::string&& module
+        );
+
+        std::vector<Structures::News> get_news(
         );
 
     };

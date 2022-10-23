@@ -222,4 +222,40 @@ namespace yfinance {
 			throw std::runtime_error(error_message);
 		}
 	}
+
+	std::vector<Structures::News> Symbol::get_news(
+	) {
+		cpr::Response r = cpr::Get(cpr::Url{
+			Utils::Statics::News::v11 + m_symbol });
+
+		if ((r.status_code == 200) && (!r.text.empty())) {
+			nlohmann::json quoteSummary = nlohmann::json::parse(r.text);
+			nlohmann::json& newsSummary = quoteSummary["news"];
+			if (newsSummary.empty()) {
+				std::string error_message =
+					"No news found for symbol: " + m_symbol;
+				throw std::runtime_error(error_message);
+			}
+			std::vector<Structures::News> nv;
+			std::vector<std::string> t_relatedTickers;
+			for (auto& n : newsSummary) {
+				auto relatedTickers = n["relatedTickers"].dump();
+				boost::split(t_relatedTickers, relatedTickers.substr(1,
+					relatedTickers.size() - 2), boost::is_any_of(","));
+				std::for_each(t_relatedTickers.begin(), t_relatedTickers.end(),
+					[&](std::string& s) { s = std::regex_replace(
+						s, std::regex("[^\\w\\d\\.]+"), ""); });
+				nv.emplace_back(Structures::News(n["title"], 
+					n["publisher"], n["link"], (time_t)std::stol(
+					n["providerPublishTime"].dump()),
+					t_relatedTickers));
+			};
+			return nv;
+		}
+		else {
+			std::string error_message =
+				"Request failed with status code: " + r.status_code;
+			throw std::runtime_error(error_message);
+		}
+	}
 }

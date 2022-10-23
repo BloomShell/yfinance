@@ -11,6 +11,9 @@ void options(int argc, char** argv) {
 	// Loading options into struct:
 	auto options = tk->get_options();
 
+	// Print Option:
+	std::cout << options["calls"][0];
+
 	// Benchmarking:
 	auto f = std::bind(
 		&yfinance::Symbol::get_options, tk);
