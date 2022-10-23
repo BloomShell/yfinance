@@ -14,7 +14,7 @@ Added the `get_quotes` and `get_options` member functions for the `Symbol` class
 **_v-0.2 (10-05-2022)_**:
 Added the `get_profile` and `get_summary` member functions for the `Symbol` class. 
 
-**_v-0.3 (10-05-2022)_**:
+**_v-0.3 (10-23-2022)_**:
 Added the `get_news` member functions for the `Symbol` class. 
 
 ### Approach
