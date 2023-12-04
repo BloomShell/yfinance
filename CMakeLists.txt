@@ -12,6 +12,8 @@ else()
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+find_package(Boost 1.81.0 REQUIRED)
+
 include(FetchContent)
 
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
