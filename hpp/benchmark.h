@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _BENCHMARK_H_
+#define _BENCHMARK_H_
 #include "structures.h"
 #include "utils.h"
 
@@ -27,3 +28,4 @@ namespace Benchmarking {
         return Structures::TimeitResult(iters, min, max, avg, sum);
     };
 }
+#endif // #ifndef _BENCHMARK_H_

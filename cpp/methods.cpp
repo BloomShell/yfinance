@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "../hpp/methods.h"
 
 
