@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _STRUCTURES_H
+#define _STRUCTURES_H
+
 #include <algorithm>
 #include <string>
 #include <vector>
@@ -30,14 +32,14 @@ namespace Structures {
             std::vector<float> low,
             std::vector<float> close,
             std::vector<long int> volume,
-            std::vector<time_t> unix
+            std::vector<time_t> _unix
         ) :
             m_open(open),
             m_high(high),
             m_low(low),
             m_close(close),
             m_volume(volume),
-            m_unix(unix)
+            m_unix(_unix)
         {};
 
         friend std::ostream& operator<<(
@@ -106,12 +108,12 @@ namespace Structures {
             m_strike(strike), 
             m_lastPrice(lastPrice), 
             m_change(change),
+            m_volume(volume), 
             m_bid(bid), 
             m_ask(ask), 
             m_percentChange(percentChange),
             m_openInterest(openInterest), 
             m_impliedVolatility(impliedVolatility),
-            m_volume(volume), 
             m_expiration(expiration),
             m_lastTradeDate(lastTradeDate) 
         {};
@@ -232,10 +234,10 @@ namespace Structures {
             stream << "=======================================================================\n\n";
 
             stream << "\tIterations completed\t: " << t.m_iters << "\n";
-            stream << "\tTotal milliseconds\t:" << t.m_sum << "\n";
-            stream << "\tAverage milliseconds\t:" << t.m_avg << "\n";
-            stream << "\tMaxima milliseconds\t:" << t.m_max << "\n";
-            stream << "\tMinima milliseconds\t:" << t.m_min << "\n\n\n";
+            stream << "\tTotal milliseconds\t:" << t.m_sum.count() << "\n";
+            stream << "\tAverage milliseconds\t:" << t.m_avg.count() << "\n";
+            stream << "\tMaxima milliseconds\t:" << t.m_max.count() << "\n";
+            stream << "\tMinima milliseconds\t:" << t.m_min.count() << "\n\n\n";
             return stream;
         }
     };
@@ -303,3 +305,5 @@ namespace Structures {
         };
     };
 }
+
+#endif // #ifndef _STRUCTURES_H

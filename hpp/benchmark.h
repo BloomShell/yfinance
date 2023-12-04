@@ -1,6 +1,7 @@
-#pragma once
-#include "structures.h"
-#include "utils.h"
+#ifndef _BENCHMARK_H_
+#define _BENCHMARK_H_
+#include <structures.h>
+#include <utils.h>
 
 
 namespace Benchmarking {
@@ -25,5 +26,6 @@ namespace Benchmarking {
         milliseconds sum = std::accumulate(durations.begin(), durations.end(), milliseconds(0));
         milliseconds avg = sum / durations.size();
         return Structures::TimeitResult(iters, min, max, avg, sum);
-    };
+    }
 }
+#endif // #ifndef _BENCHMARK_H_

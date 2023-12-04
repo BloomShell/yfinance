@@ -1,5 +1,5 @@
-#include "../hpp/utils.h"
-#include "../hpp/structures.h"
+#include <utils.h>
+#include <structures.h>
 
 
 namespace Utils {

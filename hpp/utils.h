@@ -5,7 +5,7 @@
 #include <string>
 #include <array>
 #include <unordered_map>
-#include "../hpp/structures.h"
+#include <structures.h>
 using time_point = std::chrono::time_point<std::chrono::high_resolution_clock>;
 
 

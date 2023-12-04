@@ -1,6 +1,6 @@
-#include "../hpp/base.h"
-#include "../hpp/utils.h"
-#include "../hpp/methods.h"
+#include <base.h>
+#include <utils.h>
+#include <methods.h>
 
 
 namespace yfinance {
@@ -59,7 +59,7 @@ namespace yfinance {
 			unsigned int size = quotemap["unix"].size();
 			std::vector<float> open(size), high(size), low(size), close(size);
 			std::vector<long int> volume(size);
-			std::vector<time_t> unix(size);
+			std::vector<time_t> _unix(size);
 
 			std::transform(quotemap["open"].begin(), quotemap["open"].end(), open.begin(),
 				[](const std::string& token) { return std::stof(token); });
@@ -71,7 +71,7 @@ namespace yfinance {
 				[](const std::string& token) { return std::stof(token); });
 			std::transform(quotemap["volume"].begin(), quotemap["volume"].end(), volume.begin(),
 				[](const std::string& token) { return std::stoll(token); });
-			std::transform(quotemap["unix"].begin(), quotemap["unix"].end(), unix.begin(),
+			std::transform(quotemap["unix"].begin(), quotemap["unix"].end(), _unix.begin(),
 				[](const std::string& token) { return (time_t)std::stoll(token); });
 
 			return Structures::Quotes(
@@ -80,7 +80,7 @@ namespace yfinance {
 				std::move(low),
 				std::move(close),
 				std::move(volume),
-				std::move(unix)
+				std::move(_unix)
 			);
 		}
 		else {
@@ -113,8 +113,8 @@ namespace yfinance {
 				auto& raw = rjson["optionChain"]["result"][0]
 					["options"][0][kind];
 
-				unsigned int size = raw.size();
-				for (int i = 0; i < size; i++) {
+				size_t size = raw.size();
+				for (size_t i = 0; i < size; i++) {
 					Structures::Option option;
 					for (auto& [key, val] : raw[i].items()) {
 						// As the response from YFINANCE API may be 
@@ -202,7 +202,7 @@ namespace yfinance {
 			throw std::runtime_error(error_message);
 		}
 		
-	};
+	}
 
 	nlohmann::json Symbol::get_summary(
 		const std::string&& module

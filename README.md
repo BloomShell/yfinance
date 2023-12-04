@@ -7,6 +7,31 @@
 ### Quick Start
 This is a quick and simple repository which is still in development. Its aim is to simplify the interaction between the **_Yahoo Finance_** API and **_C++_**. 
 
+This project uses [CMake](https://cmake.org/) as its build system.
+
+It depends on two other projects:
+
+* [C++ Requests: Curl for People (cpr)](https://github.com/libcpr/cpr)
+* [JSON for Modern C++](https://github.com/nlohmann/json)
+
+This project uses the [Boost Libraries](http://www.boost.org/).
+
+If you don't have [C++ Requests: Curl for People (cpr)](https://github.com/libcpr/cpr) and/or [JSON for Modern C++](https://github.com/nlohmann/json) you can use CMake's FetchContent to add them. Just add something like
+
+```cmake
+include(FetchContent)
+
+FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
+                         GIT_TAG 0817715923c9705e68994eb52ef9df3f6845beba) # The commit hash for 1.10.x. Replace with the latest from: https://github.com/libcpr/cpr/releases
+FetchContent_MakeAvailable(cpr)
+
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)
+FetchContent_MakeAvailable(json)
+```
+
+to your CMakeLists.txt. Check out this project's [CMakeLists.txt](CMakeLists.txt) to see how to do it.
+
+
 ### Version Updates
 **_v-0.1 (09-30-2022)_**:
 Added the `get_quotes` and `get_options` member functions for the `Symbol` class.

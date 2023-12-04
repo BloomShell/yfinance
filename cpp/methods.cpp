@@ -1,4 +1,5 @@
-#include "../hpp/methods.h"
+#include <algorithm>
+#include <methods.h>
 
 
 namespace Methods {
@@ -24,5 +25,5 @@ namespace Methods {
             it++;
         }
         return indexes;
-    };
+    }
 }

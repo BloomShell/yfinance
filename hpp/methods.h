@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _METHODS_H_
+#define _METHODS_H_
+
 #include <string>
 #include <vector>
 
@@ -15,3 +17,5 @@ namespace Methods {
         const std::vector<std::string>& z
     );
 }
+
+#endif // #ifndef _METHODS_H_
