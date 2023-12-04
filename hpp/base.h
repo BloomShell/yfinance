@@ -1,14 +1,14 @@
 #ifndef _BASE_H_
 #define _BASE_H_
 #include <boost/algorithm/string.hpp>
-#include "boost/lexical_cast.hpp"
+#include <boost/lexical_cast.hpp>
 #include <nlohmann/json.hpp>
 #include <algorithm>
 #include <string>
 #include <regex>
 #include <cpr/cpr.h>
-#include "../hpp/structures.h"
-#include "../hpp/utils.h"
+#include <structures.h>
+#include <utils.h>
 using json = nlohmann::json;
 
 

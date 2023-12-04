@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "../hpp/methods.h"
+#include <methods.h>
 
 
 namespace Methods {

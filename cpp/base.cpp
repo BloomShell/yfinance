@@ -1,6 +1,6 @@
-#include "../hpp/base.h"
-#include "../hpp/utils.h"
-#include "../hpp/methods.h"
+#include <base.h>
+#include <utils.h>
+#include <methods.h>
 
 
 namespace yfinance {
@@ -113,8 +113,8 @@ namespace yfinance {
 				auto& raw = rjson["optionChain"]["result"][0]
 					["options"][0][kind];
 
-				unsigned int size = raw.size();
-				for (int i = 0; i < size; i++) {
+				size_t size = raw.size();
+				for (size_t i = 0; i < size; i++) {
 					Structures::Option option;
 					for (auto& [key, val] : raw[i].items()) {
 						// As the response from YFINANCE API may be 

@@ -1,5 +1,5 @@
-#include "../hpp/requests.h"
-#include "../hpp/structures.h"
+#include <requests.h>
+#include <structures.h>
 
 
 namespace Requests {

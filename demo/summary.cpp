@@ -1,5 +1,5 @@
-#include "../hpp/base.h"
-#include "../hpp/benchmark.h"
+#include <base.h>
+#include <benchmark.h>
 
 
 void summary(int argc, char** argv) {

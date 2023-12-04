@@ -108,12 +108,12 @@ namespace Structures {
             m_strike(strike), 
             m_lastPrice(lastPrice), 
             m_change(change),
+            m_volume(volume), 
             m_bid(bid), 
             m_ask(ask), 
             m_percentChange(percentChange),
             m_openInterest(openInterest), 
             m_impliedVolatility(impliedVolatility),
-            m_volume(volume), 
             m_expiration(expiration),
             m_lastTradeDate(lastTradeDate) 
         {};

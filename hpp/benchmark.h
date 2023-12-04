@@ -1,7 +1,7 @@
 #ifndef _BENCHMARK_H_
 #define _BENCHMARK_H_
-#include "structures.h"
-#include "utils.h"
+#include <structures.h>
+#include <utils.h>
 
 
 namespace Benchmarking {
