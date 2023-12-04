@@ -13,7 +13,7 @@ namespace Requests {
 	{
 		((std::string*)userp)->append((char*)contents, size * nmemb);
 		return size * nmemb;
-	};
+	}
 
 	Structures::Response Requests(
 		std::string&& url,

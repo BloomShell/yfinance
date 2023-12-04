@@ -202,7 +202,7 @@ namespace yfinance {
 			throw std::runtime_error(error_message);
 		}
 		
-	};
+	}
 
 	nlohmann::json Symbol::get_summary(
 		const std::string&& module

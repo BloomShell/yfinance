@@ -25,5 +25,5 @@ namespace Methods {
             it++;
         }
         return indexes;
-    };
+    }
 }
